@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-card" aria-labelledby="game-title">
+        <div class="game-header">
+          <div>
+            <p class="eyebrow">Classic Arcade</p>
+            <h1 id="game-title">Snake</h1>
+          </div>
+          <button id="restart-button" class="button" type="button">Restart</button>
+        </div>
+
+        <div class="status-bar" aria-live="polite">
+          <p>Score: <span id="score">0</span></p>
+          <p>Status: <span id="status">Ready</span></p>
+        </div>
+
+        <div
+          id="board"
+          class="board"
+          role="grid"
+          aria-label="Snake game board"
+        ></div>
+
+        <div class="instructions">
+          <p>Move with arrow keys or WASD.</p>
+          <p>Press Space to pause and resume.</p>
+        </div>
+
+        <div class="mobile-controls" aria-label="Touch controls">
+          <button class="button control" data-direction="up" type="button">Up</button>
+          <div class="control-row">
+            <button class="button control" data-direction="left" type="button">Left</button>
+            <button class="button control" data-action="pause" type="button">Pause</button>
+            <button class="button control" data-direction="right" type="button">Right</button>
+          </div>
+          <button class="button control" data-direction="down" type="button">Down</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
