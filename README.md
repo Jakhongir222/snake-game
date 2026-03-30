@@ -2,6 +2,8 @@
 
 A tiny browser Snake game built to do one job well: slither, snack, grow, and eventually bonk into a wall because confidence got ahead of coordination.
 
+Play it here: [https://jakhongir222.github.io/snake-game/](https://jakhongir222.github.io/snake-game/)
+
 This project keeps things intentionally simple:
 - Classic grid-based Snake gameplay
 - Keyboard controls plus on-screen controls for smaller screens
