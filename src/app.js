@@ -6,11 +6,13 @@ const statusValue = document.querySelector("#status");
 const restartButton = document.querySelector("#restart-button");
 const mobileControls = document.querySelector(".mobile-controls");
 
-const TICK_MS = 140;
+const TICK_MS = 220;
+const MIN_SWIPE_DISTANCE = 24;
 const cells = [];
 
 let gameState = createInitialState();
 let timerId = null;
+let touchStart = null;
 
 buildBoard();
 render();
@@ -64,6 +66,9 @@ mobileControls?.addEventListener("click", (event) => {
     pendingDirection: setDirection(gameState.direction, direction),
   };
 });
+
+board.addEventListener("touchstart", handleTouchStart, { passive: true });
+board.addEventListener("touchend", handleTouchEnd, { passive: true });
 
 function startLoop() {
   stopLoop();
@@ -138,6 +143,52 @@ function render() {
 
   scoreValue.textContent = String(gameState.score);
   statusValue.textContent = getStatusText();
+}
+
+function handleTouchStart(event) {
+  const touch = event.changedTouches[0];
+  if (!touch) {
+    return;
+  }
+
+  touchStart = {
+    x: touch.clientX,
+    y: touch.clientY,
+  };
+}
+
+function handleTouchEnd(event) {
+  if (!touchStart || gameState.isGameOver) {
+    touchStart = null;
+    return;
+  }
+
+  const touch = event.changedTouches[0];
+  if (!touch) {
+    touchStart = null;
+    return;
+  }
+
+  const deltaX = touch.clientX - touchStart.x;
+  const deltaY = touch.clientY - touchStart.y;
+  const absX = Math.abs(deltaX);
+  const absY = Math.abs(deltaY);
+
+  if (Math.max(absX, absY) < MIN_SWIPE_DISTANCE) {
+    touchStart = null;
+    return;
+  }
+
+  const direction = absX > absY
+    ? deltaX > 0 ? "right" : "left"
+    : deltaY > 0 ? "down" : "up";
+
+  gameState = {
+    ...gameState,
+    pendingDirection: setDirection(gameState.direction, direction),
+  };
+
+  touchStart = null;
 }
 
 function getStatusText() {

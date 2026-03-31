@@ -91,6 +91,7 @@ h1 {
   border-radius: 16px;
   background: #c5b38d;
   border: 1px solid #b29d74;
+  touch-action: none;
 }
 
 .cell {
@@ -140,13 +141,15 @@ h1 {
   display: grid;
   gap: 10px;
   justify-items: center;
+  width: 100%;
 }
 
 .control {
-  min-width: 90px;
+  min-width: 96px;
+  min-height: 48px;
 }
 
-@media (min-width: 720px) {
+@media (hover: hover) and (pointer: fine) and (min-width: 720px) {
   .mobile-controls {
     display: none;
   }
@@ -165,5 +168,25 @@ h1 {
 
   .status-bar {
     gap: 6px;
+  }
+
+  .board {
+    padding: 8px;
+  }
+
+  .mobile-controls {
+    margin-top: 16px;
+    gap: 12px;
+  }
+
+  .control-row {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .control {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 12px 10px;
   }
 }
